@@ -1,38 +1,8 @@
 import React, { Component, PropTypes } from 'react'; 
-import { AppRegistry, Text, Image, StyleSheet, View, TouchableHighlight, NavigatorIOS } from 'react-native';
+import { AppRegistry, Text, Image, StyleSheet, View, TouchableHighlight, Navigator } from 'react-native';
 
-export default class NavigatorIOSApp extends Component {
-    render() {
-        return (
-            <NavigatorIOS
-              initialRoute={{
-                component: SurveyScene, 
-                title: 'Survey Scene'
-              }}
-              renderScene={(route, navigator) => {
-                return <SurveyScene title={route.title} 
-                // Function to call when a new scene should be displayed           
-                onForward={ () => {    
-                  const nextIndex = route.index + 1;
-                  navigator.push({
-                    title: 'Scene ' + nextIndex,
-                    index: nextIndex,
-                  });
-                }}
-
-                // Function to call to go back to the previous scene
-                onBack={() => {
-                  if (route.index > 0) {
-                    navigator.pop();
-                  }
-                }}
-                />
-              }}
-            />
-        )
-    }
-}
-
+import SurveyScene from './SurveyScene'; 
+    
 class sampleProject extends Component {
     state = {
         initialLatitude: 'unknown',
@@ -47,7 +17,6 @@ class sampleProject extends Component {
             for (i=0; i<5; i++) {
                 console.log("Name: "+responseJson.movies[i].title+", Year: "+responseJson.movies[i].releaseYear+" \n ");   
             }
-            //return responseJson.movies;
           })
           .catch((error) => {
             console.error(error);
@@ -76,7 +45,7 @@ class sampleProject extends Component {
 
       componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchID);
-      }
+      } 
     render() {
         let pic = {
             uri: 'https://static.squarespace.com/static/50305c7684ae7fae2e65756a/5220048ee4b053b3578fc38a/52200493e4b053b3578fe989/1277125524713/1000w/KC%20skyline%20night%20HDR%202.jpg' 
@@ -98,8 +67,31 @@ class sampleProject extends Component {
                     <Text style={styles.tip}>
                       <Text>Current position: {"\n"}</Text>
                       Lat = {this.state.lastLatitude} Long = {this.state.lastLongitude}
-                    </Text>
-                    
+                    </Text>                     
+                    <Navigator
+                        initialRoute={{ title: 'My Initial Scene', index: 0 }}
+                        renderScene={(route, navigator) =>
+                          <SurveyScene
+                            title={route.title}
+
+                            // Function to call when a new scene should be displayed           
+                            onForward={ () => {    
+                              const nextIndex = route.index + 1;
+                              navigator.push({
+                                title: 'Scene ' + nextIndex,
+                                index: nextIndex,
+                              });
+                            }}
+
+                            // Function to call to go back to the previous scene
+                            onBack={() => {
+                              if (route.index > 0) {
+                                navigator.pop();
+                              }
+                            }}
+                          />
+                        }
+                      />
                 </View>
             </Image>
         );
@@ -111,8 +103,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     image:{ 
-        marginTop: 20,
-        //width: 275,
+        marginTop: 20,        
         height: 635,
         alignSelf: 'center'
     },
@@ -135,58 +126,3 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('sampleProject', () => sampleProject); 
-
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-/*import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-
-export default class sampleProject extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Talkville!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('sampleProject', () => sampleProject);
-*/
