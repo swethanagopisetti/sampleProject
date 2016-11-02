@@ -1,4 +1,187 @@
-import React, { Component, PropTypes } from 'react'; 
+'use strict';
+import React, { Component, PropTypes } from 'react';
+import { NavigatorIOS, Text, TouchableHighlight, View, AppRegistry, StyleSheet } from 'react-native';
+
+var rootPage = require('./root.IOS');
+class sampleProject extends Component {
+  render() {
+    return (
+        <NavigatorIOS
+            style = {styles.container}
+            initialRoute={{
+          title: "Root",
+          navigationBarHidden: true,
+          component:rootPage
+          }}/>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+});
+
+AppRegistry.registerComponent('sampleProject', () => sampleProject);
+
+/*import React, { Component, PropTypes } from 'react';
+import { NavigatorIOS, Text, TouchableHighlight, View, AppRegistry } from 'react-native';
+
+export default class NavigatorIOSApp extends Component {
+  render() {
+    return (
+      <NavigatorIOS
+        initialRoute={{          
+          title: 'My Initial Scene',
+          component: sampleProject
+        }}
+        style={{flex: 1}}
+      />
+    )
+  }
+}
+
+class sampleProject extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    navigator: PropTypes.object.isRequired
+  }
+
+  constructor(props, context) {
+    super(props, context);
+    this._onForward = this._onForward.bind(this);
+  }
+
+  _onForward() {
+    this.navigator.push({
+      title: 'Scene ' + nextIndex,
+    });
+  }
+
+  render() {
+    return (
+      <View>
+        <Text>Current Scene: { this.props.title }</Text>
+        <TouchableHighlight onPress={this._onForward}>
+          <Text>Tap me to load the next scene</Text>
+        </TouchableHighlight>
+      </View>
+    )
+  }
+}
+AppRegistry.registerComponent('sampleProject', () => sampleProject);*/
+
+/*import React, {Component} from 'react';
+import {AppRegistry, StyleSheet, Text, View, NavigatorIOS, TouchableWithoutFeedback} from 'react-native';
+
+class FirstPage extends Component {
+  _handleChangePage() {
+    this.props.toggleNavBar();
+    this.props.navigator.push({
+      title: "Second Page",
+      component: SecondPage,
+      passProps: {
+        toggleNavBar: this.props.toggleNavBar,
+      }
+    });
+
+  }
+
+  render() {
+    return (
+      <View>
+        <Text>FirstPage</Text>
+
+        <TouchableWithoutFeedback onPress={this._handleChangePage}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Go to SecondPage</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
+    );
+  }
+}
+
+class SecondPage extends Component {
+  _handleChangePage() {
+    this.props.toggleNavBar();
+    this.props.navigator.push({
+      title: "First Page",
+      component: FirstPage,
+      passProps: {
+        toggleNavBar: this.props.toggleNavBar,
+      }
+    });
+
+  }
+
+  render() {
+    return (
+      <View>
+        <Text>SecondPage</Text>
+
+        <TouchableWithoutFeedback onPress={this._handleChangePage}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Go to FirstPage</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
+    );
+  }
+}
+
+class sampleProject extends Component {
+  getInitialState() {
+    return {
+      navigationBarHidden: false
+    };
+  }
+
+  toggleNavBar() {
+    this.setState({
+      navigationBarHidden: !this.state.navigationBarHidden
+    });
+  }
+
+  render() {
+    return (
+      <NavigatorIOS ref="nav"
+                    itemWrapperStyle={styles.navWrap}
+                    style={styles.nav}
+                    navigationBarHidden={this.state.navigationBarHidden}
+                    initialRoute={{
+                      title: "First Page",
+                      component: FirstPage,
+                      passProps: {
+                        toggleNavBar: this.toggleNavBar,
+                      }
+                    }} />
+    );
+  }
+}
+
+var styles = StyleSheet.create({
+  navWrap: {
+    flex: 1,
+    marginTop: 70
+  },
+  nav: {
+    flex: 1,
+  },
+  button: {
+    backgroundColor: "#009DDD",
+    padding: 10,
+    margin: 10,
+  },
+  buttonText: {
+    color: "#fff"
+  }
+});
+
+AppRegistry.registerComponent('sampleProject', () => sampleProject); */
+
+/*import React, { Component, PropTypes } from 'react'; 
 import { AppRegistry, Text, Image, StyleSheet, View, TouchableHighlight, Navigator } from 'react-native';
 
 import SurveyScene from './SurveyScene'; 
@@ -71,7 +254,7 @@ class sampleProject extends Component {
                     <Navigator
                         initialRoute={{ title: 'My Initial Scene', index: 0 }}
                         renderScene={(route, navigator) =>
-                          <SurveyScene
+                          <SurveyScene                            
                             title={route.title}
 
                             // Function to call when a new scene should be displayed           
@@ -125,4 +308,4 @@ const styles = StyleSheet.create({
     }
 });
 
-AppRegistry.registerComponent('sampleProject', () => sampleProject); 
+AppRegistry.registerComponent('sampleProject', () => sampleProject); */
