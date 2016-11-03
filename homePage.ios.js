@@ -1,49 +1,23 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { NavigatorIOS, Text, TouchableHighlight, View, AppRegistry, StyleSheet, Image } from 'react-native';
+import { NavigatorIOS, Text, TouchableHighlight, View, AppRegistry, StyleSheet, Dimensions, Image } from 'react-native';
 
-var homePage = require('./homePage.ios');
-class sampleProject extends Component {
-  render() {
-    return (
-        <NavigatorIOS
-            style = {styles.container}
-            initialRoute={{
-          title: "Home",
-          navigationBarHidden: true,
-          component:homePage
-          }}/>
-    );
-  }
-}
+var surveyPage = require('./surveyPage.ios.js');
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});
-
-AppRegistry.registerComponent('sampleProject', () => sampleProject);
-
-/*
-class sampleProject extends Component {
+class HomePage extends Component {
     state = {
         initialLatitude: 'unknown',
         lastLatitude: 'unknown',
         initialLongitude: 'unknown',
         lastLongitude: 'unknown'
     };
-    getMoviesFromApiAsync() {
-        return fetch('https://facebook.github.io/react-native/movies.json')
-          .then((response) => response.json())
-          .then((responseJson) => {
-            for (i=0; i<5; i++) {
-                console.log("Name: "+responseJson.movies[i].title+", Year: "+responseJson.movies[i].releaseYear+" \n ");   
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+    goToSurveyPage() {
+        this.props.navigator.push({
+            title: 'Survey',
+            component: surveyPage,
+            navigationBarHidden: true,
+            passProps: {myElement: 'text'}
+        });
     }
     watchID: ?number = null;
 
@@ -69,19 +43,19 @@ class sampleProject extends Component {
       componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchID);
       } 
-    render() {
+    render(){
         let pic = {
             uri: 'https://static.squarespace.com/static/50305c7684ae7fae2e65756a/5220048ee4b053b3578fc38a/52200493e4b053b3578fe989/1277125524713/1000w/KC%20skyline%20night%20HDR%202.jpg' 
         };
-        return (
+        return(
             <Image style = {styles.image} source = {pic}>
                 <View style= {styles.view} >
                     <Text style = {styles.heading} >Welcome to TALKville!</Text>
                     <Text style = {styles.tip} >👀 First tip: The first tip is to be displayed here.</Text>
                     <Text style = {styles.tip} >❓ Second tip: The second tip is to be displayed here.</Text>
                     <Text style = {styles.tip} >💕 Third tip: The third tip is to be displayed here.</Text>            
-                    <TouchableHighlight style = {styles.button} onPress={this.getMoviesFromApiAsync}>
-                        <Text>Load JSON</Text>
+                    <TouchableHighlight style = {styles.button} onPress={() => this.goToSurveyPage()}>
+                        <Text>Load Survey</Text>
                     </TouchableHighlight>
                     <Text style={styles.tip} >
                       <Text>Initial position: {"\n"}</Text>
@@ -91,36 +65,17 @@ class sampleProject extends Component {
                       <Text>Current position: {"\n"}</Text>
                       Lat = {this.state.lastLatitude} Long = {this.state.lastLongitude}
                     </Text>                     
-                    <Navigator
-                        initialRoute={{ title: 'My Initial Scene', index: 0 }}
-                        renderScene={(route, navigator) =>
-                          <SurveyScene                            
-                            title={route.title}
-
-                            // Function to call when a new scene should be displayed           
-                            onForward={ () => {    
-                              const nextIndex = route.index + 1;
-                              navigator.push({
-                                title: 'Scene ' + nextIndex,
-                                index: nextIndex,
-                              });
-                            }}
-
-                            // Function to call to go back to the previous scene
-                            onBack={() => {
-                              if (route.index > 0) {
-                                navigator.pop();
-                              }
-                            }}
-                          />
-                        }
-                      />
                 </View>
-            </Image>
+            </Image>                                  
         );
     }
 }
-const styles = StyleSheet.create({
+
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: 20
+    },
     view: {
         flex: 1,
         flexDirection: 'column'
@@ -146,4 +101,5 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: 'powderblue'
     }
-}); */
+});
+module.exports = HomePage;
