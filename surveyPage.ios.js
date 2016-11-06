@@ -13,8 +13,12 @@ var radio_props_one = [
 ]; 
 
 class Survey extends Component { 
+    state = {
+        response: ''
+    };
     goSomethingWithSurveyResult() {
-        // (May be) save the survey answers in database
+        // TODO: (May be) save the survey answers in database
+        this.setState({response: "Thanks for submitting your response."});
     }
     render() {
         let pic = {
@@ -31,6 +35,7 @@ class Survey extends Component {
                     <TouchableHighlight style = {styles.button} onPress={() => this.goSomethingWithSurveyResult()}>
                         <Text>Submit</Text>
                     </TouchableHighlight>
+                    <Text style={styles.text} > {this.state.response} </Text>
                 </View>
             </Image>
         );
