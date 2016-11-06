@@ -99,7 +99,7 @@ var styles = StyleSheet.create({
     button:{
         marginTop: 50,
         alignSelf: 'center',
-        backgroundColor: 'powderblue'
+        backgroundColor: 'cyan'
     }
 });
 module.exports = HomePage;

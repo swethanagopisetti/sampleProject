@@ -3,15 +3,17 @@ import React, { Component, PropTypes } from 'react';
 import { NavigatorIOS, Text, TouchableHighlight, View, AppRegistry, StyleSheet, Image } from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-var radio_props = [
+var radio_props_one = [
     {label: 'Yes', value:0 },
     {label: 'No', value:1 }
-];
-class Register extends Component {   
-    getInitialState (){
-        return {
-            value:0,
-        }
+], radio_props_two = [
+    {label: 'Everyday', value:0 },
+    {label: 'Once a week', value:1 }
+]; 
+
+class Survey extends Component { 
+    goSomethingWithSurveyResult() {
+        // (May be) save the survey answers in database
     }
     render() {
         let pic = {
@@ -21,9 +23,13 @@ class Register extends Component {
             <Image style = {styles.image} source = {pic}>
                 <View style= {styles.view} >
                     <Text style = {styles.heading} >Welcome to TALKville!</Text>
-                    <Text style = {styles.text} > Do you like the app?</Text>
-                    <RadioForm radio_props={radio_props} initial={0} onPress={(value) => {this.setState({value:value})}} />
-                    <Text style = {styles.text} >❓ How often do you use the app?</Text>
+                    <Text style = {styles.text} >Do you like the app?</Text>
+                    <RadioForm radio_props={radio_props_one} initial={0} onPress={(value) => {this.setState({value:value})}} formHorizontal={true}/>
+                    <Text style = {styles.text} >How often do you use the app?</Text>
+                    <RadioForm radio_props={radio_props_two} initial={0} onPress={(value) => {this.setState({value:value})}} labelColor={'#8A2BE2'} buttonColor={'#8A2BE2'}/>
+                    <TouchableHighlight style = {styles.button} onPress={() => this.goSomethingWithSurveyResult()}>
+                        <Text>Submit</Text>
+                    </TouchableHighlight>
                 </View>
             </Image>
         );
@@ -57,7 +63,7 @@ var styles = StyleSheet.create({
     button:{
         marginTop: 50,
         alignSelf: 'center',
-        backgroundColor: 'powderblue'
+        backgroundColor: 'cyan'
     }
 });
-module.exports = Register;
+module.exports = Survey;
