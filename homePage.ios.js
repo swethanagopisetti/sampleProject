@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { NavigatorIOS, Text, TouchableHighlight, View, AppRegistry, StyleSheet, Dimensions, Image } from 'react-native';
 
 var surveyPage = require('./surveyPage.ios.js');
+var styles = require('./styleSheet.ios.js');
 
 class HomePage extends Component {
     state = {
@@ -51,17 +52,17 @@ class HomePage extends Component {
             <Image style = {styles.image} source = {pic}>
                 <View style= {styles.view} >
                     <Text style = {styles.heading} >Welcome to TALKville!</Text>
-                    <Text style = {styles.tip} >👀 First tip: The first tip is to be displayed here.</Text>
-                    <Text style = {styles.tip} >❓ Second tip: The second tip is to be displayed here.</Text>
-                    <Text style = {styles.tip} >💕 Third tip: The third tip is to be displayed here.</Text>            
+                    <Text style = {styles.text} >👀 First tip: The first tip is to be displayed here.</Text>
+                    <Text style = {styles.text} >❓ Second tip: The second tip is to be displayed here.</Text>
+                    <Text style = {styles.text} >💕 Third tip: The third tip is to be displayed here.</Text>            
                     <TouchableHighlight style = {styles.button} onPress={() => this.goToSurveyPage()}>
                         <Text>Load Survey</Text>
                     </TouchableHighlight>
-                    <Text style={styles.tip} >
+                    <Text style={styles.text} >
                       <Text>Initial position: {"\n"}</Text>
                       Lat = {this.state.initialLatitude} Long = {this.state.initialLongitude}
                     </Text>
-                    <Text style={styles.tip}>
+                    <Text style={styles.text}>
                       <Text>Current position: {"\n"}</Text>
                       Lat = {this.state.lastLatitude} Long = {this.state.lastLongitude}
                     </Text>                     
@@ -71,35 +72,4 @@ class HomePage extends Component {
     }
 }
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 20
-    },
-    view: {
-        flex: 1,
-        flexDirection: 'column'
-    },
-    image:{ 
-        marginTop: 20,        
-        height: 635,
-        alignSelf: 'center'
-    },
-    heading:{ 
-        marginTop: 5,
-        alignSelf: 'center',
-        marginBottom: 10
-    },
-    tip:{ 
-        marginTop: 20,
-        marginLeft: 5,
-        marginRight: 5,
-        alignSelf: 'flex-start'
-    },
-    button:{
-        marginTop: 50,
-        alignSelf: 'center',
-        backgroundColor: 'cyan'
-    }
-});
 module.exports = HomePage;

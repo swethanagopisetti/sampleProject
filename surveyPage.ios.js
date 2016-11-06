@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { NavigatorIOS, Text, TouchableHighlight, View, AppRegistry, StyleSheet, Image } from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
+var styles = require('./styleSheet.ios.js');
 var radio_props_one = [
     {label: 'Yes', value:0 },
     {label: 'No', value:1 }
@@ -35,35 +36,5 @@ class Survey extends Component {
         );
     }
 }
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 20
-    },
-    view: {
-        flex: 1,
-        flexDirection: 'column'
-    },
-    image:{ 
-        marginTop: 20,        
-        height: 635,
-        alignSelf: 'center'
-    },
-    heading:{ 
-        marginTop: 5,
-        alignSelf: 'center',
-        marginBottom: 10
-    },
-    text:{ 
-        marginTop: 20,
-        marginLeft: 5,
-        marginRight: 5,
-        alignSelf: 'flex-start'
-    },
-    button:{
-        marginTop: 50,
-        alignSelf: 'center',
-        backgroundColor: 'cyan'
-    }
-});
+
 module.exports = Survey;
